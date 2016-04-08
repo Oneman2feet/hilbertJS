@@ -38,15 +38,18 @@ function gotStream(stream) {
 
 function draw() {
   drawVisual = requestAnimationFrame(draw);
-  analyser.getByteTimeDomainData(dataArray);
+  //analyser.getByteTimeDomainData(dataArray); // waveform
+  analyser.getByteFrequencyData(dataArray); // frequencies
   canvasCtx.clearRect(0, 0, WIDTH, HEIGHT);
 
   // FFT
+  /*
   var fft = new FFT(2048, 44100);
   fft.forward(dataArray);
   var spectrum = fft.spectrum;
+  */
 
-  drawSpectrum(spectrum);
+  drawSpectrum(dataArray);
 };
 
 draw();
