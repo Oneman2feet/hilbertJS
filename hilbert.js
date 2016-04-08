@@ -43,15 +43,34 @@ function draw() {
   canvasCtx.clearRect(0, 0, WIDTH, HEIGHT);
 
   // FFT
+  /*
   var fft = new FFT(2048, 44100);
   fft.forward(dataArray);
   var spectrum = fft.spectrum;
   drawSpectrum(spectrum);
   fft.inverse(spectrum);
   drawXY(fft.real,fft.imag);
+  */
+
+  var hil = hilbert(dataArray);
+  drawXY(hil.real, hil.imag);
 };
 
 draw();
+
+function hilbert(signal) {
+  var fft = new FFT(2048, 44100);
+  fft.forward(signal);
+  var spectrum = fft.spectrum;
+  var N = spectrum.length;
+  var h = spectrum.map(function(el,i){
+    var half = ~~(N/2) + 1
+    if (i===1 || i===half) return el;
+    return (i<half) ? 2.0 * el: 0;
+  });
+  fft.inverse(h);
+  return fft;
+}
 
 function drawXY(real, imaginary) {
   canvasCtx.beginPath();
