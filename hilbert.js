@@ -49,7 +49,7 @@ function draw() {
   drawSpectrum(spectrum);
   fft.inverse(spectrum);
   console.log(Object.getOwnPropertyNames(fft));
-  drawXY(fft.real,fft.real);
+  drawXY(fft.real,fft.imag);
 };
 
 draw();
