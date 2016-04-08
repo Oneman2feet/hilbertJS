@@ -3,6 +3,7 @@ var analyser;
 
 var canvas = document.getElementById("canvas");
 var canvasCtx = canvas.getContext("2d");
+var WIDTH=500, HEIGHT=400;
 
 if (AudioContext){
   audioCtx = new AudioContext();
