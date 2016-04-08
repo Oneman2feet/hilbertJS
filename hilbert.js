@@ -47,9 +47,10 @@ function draw() {
   var fft = new FFT(2048, 44100);
   fft.forward(dataArray);
   var spectrum = fft.spectrum;
+  drawSpectrum(spectrum);
   */
 
-  drawSpectrum(dataArray);
+  drawFrequencies();
 };
 
 draw();
@@ -71,6 +72,21 @@ function drawSpectrum(spectrum) {
     canvasCtx.stroke();
 
     x += sliceWidth;
+  }
+}
+
+function drawFrequencies(spectrum) {
+  var barWidth = (WIDTH / bufferLength) * 2.5;
+  var barHeight;
+  var x = 0;
+
+  for(var i = 0; i < bufferLength; i++) {
+    barHeight = dataArray[i]/2;
+
+    canvasCtx.fillStyle = 'rgb(' + (barHeight+100) + ',50,50)';
+    canvasCtx.fillRect(x,HEIGHT-barHeight/2,barWidth,barHeight);
+
+    x += barWidth + 1;
   }
 }
 
