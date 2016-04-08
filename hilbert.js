@@ -1,9 +1,13 @@
 var AudioContext = (window.AudioContext || window.webkitAudioContext || window.mozAudioContext || window.oAudioContext || window.msAudioContext);
+var analyser;
+
+var canvas = document.getElementById("canvas");
+var canvasCtx = canvas.getContext("2d");
 
 if (AudioContext){
-  var audioCtx = new AudioContext();
+  audioCtx = new AudioContext();
   var gainNode = audioCtx.createGain();
-  var analyser = audioCtx.createAnalyser();
+  analyser = audioCtx.createAnalyser();
   //confusing, gain on oscilloscope, different for gain affecting input
   // gainNode.gain.value = ui.gain.value;
   gainNode.gain.value = 3;
@@ -43,9 +47,6 @@ function gotStream(stream) {
   // osc.connect(gainNode);
   streaming = true;
 }
-
-var canvas = document.getElementById("canvas");
-var canvasCtx = canvas.getContext("2d");
 
 // draw an oscilloscope of the current audio source
 function draw() {
