@@ -40,10 +40,44 @@ function draw() {
   drawVisual = requestAnimationFrame(draw);
   analyser.getByteTimeDomainData(dataArray);
   canvasCtx.clearRect(0, 0, WIDTH, HEIGHT);
-  drawOscilloscope();
+
+  // FFT
+  var fft = new FFT(2048, 44100);
+  fft.forward(dataArray);
+  var spectrum = fft.spectrum;
+
+  drawSpectrum(spectrum);
 };
 
 draw();
+
+function drawSpectrum(spectrum) {
+  console.log(spectrum);
+  /*
+  canvasCtx.lineWidth = 2;
+  canvasCtx.strokeStyle = '#000';
+  canvasCtx.beginPath();
+
+  var sliceWidth = WIDTH * 1.0 / bufferLength;
+  var x = 0;
+
+  for(var i=0; i<bufferLength; i++) {
+    var v = dataArray[i] / 128.0;
+    var y = v * HEIGHT/2;
+
+    if(i===0) {
+      canvasCtx.moveTo(x, y);
+    } else {
+      canvasCtx.lineTo(x, y);
+    }
+
+    x += sliceWidth;
+  }
+
+  canvasCtx.lineTo(canvas.width, canvas.height/2);
+  canvasCtx.stroke();
+  */
+}
 
 function drawOscilloscope() {
   canvasCtx.lineWidth = 2;
