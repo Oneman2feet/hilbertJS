@@ -53,7 +53,7 @@ function draw() {
   */
 
   var hil = hilbert(dataArray);
-  drawWave(hil.real);
+  drawWave(hil.imag, 1000);
   //drawXY(hil.real, hil.imag);
 };
 
@@ -73,7 +73,7 @@ function hilbert(signal) {
   return fft;
 }
 
-function drawWave(signal) {
+function drawWave(signal, scale) {
   canvasCtx.lineWidth = 2;
   canvasCtx.strokeStyle = '#000';
   canvasCtx.beginPath();
@@ -82,7 +82,7 @@ function drawWave(signal) {
   var x = 0;
 
   for(var i=0; i<signal.length; i++) {
-    var v = signal[i] / 128.0;
+    var v = signal[i] / scale;
     var y = v * HEIGHT/2;
 
     if(i===0) {
