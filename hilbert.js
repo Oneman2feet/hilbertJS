@@ -1,5 +1,6 @@
 var AudioContext = (window.AudioContext || window.webkitAudioContext || window.mozAudioContext || window.oAudioContext || window.msAudioContext);
 var analyser;
+var numSamples;
 
 var canvas = document.getElementById("canvas");
 var canvasCtx = canvas.getContext("2d");
@@ -21,7 +22,7 @@ if (AudioContext){
   var dataArray = new Uint8Array(analyser.frequencyBinCount);
   var streaming = false;
   var sampleRate = audioCtx.sampleRate;
-  var numSamples = analyser.frequencyBinCount;
+  numSamples = analyser.frequencyBinCount;
   analyser.getByteTimeDomainData(dataArray);
 } else {
   console.log("no audio context");
@@ -66,6 +67,7 @@ function draw() {
   var sliceWidth = WIDTH * 1.0 / bufferLength;
   var x = 0;
 
+  var bufferLength = numSamples; // is this right?
   for(var i = 0; i < bufferLength; i++) {
 
     var v = dataArray[i] / 128.0;
