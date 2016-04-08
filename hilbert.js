@@ -52,31 +52,22 @@ function draw() {
 draw();
 
 function drawSpectrum(spectrum) {
-  console.log(spectrum);
-  /*
   canvasCtx.lineWidth = 2;
   canvasCtx.strokeStyle = '#000';
-  canvasCtx.beginPath();
 
-  var sliceWidth = WIDTH * 1.0 / bufferLength;
+  var sliceWidth = WIDTH * 1.0 / spectrum.length;
   var x = 0;
 
-  for(var i=0; i<bufferLength; i++) {
-    var v = dataArray[i] / 128.0;
+  for(var i=0; i<spectrum.length; i++) {
+    var v = spectrum[i];
     var y = v * HEIGHT/2;
 
-    if(i===0) {
-      canvasCtx.moveTo(x, y);
-    } else {
-      canvasCtx.lineTo(x, y);
-    }
+    canvasCtx.moveTo(x, HEIGHT/2);
+    canvasCtx.lineTo(x, y);
+    canvasCtx.stroke();
 
     x += sliceWidth;
   }
-
-  canvasCtx.lineTo(canvas.width, canvas.height/2);
-  canvasCtx.stroke();
-  */
 }
 
 function drawOscilloscope() {
