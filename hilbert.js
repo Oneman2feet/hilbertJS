@@ -52,8 +52,8 @@ function draw() {
   drawXY(fft.real,fft.imag);
   */
 
-  var hil = hilbert(dataArray);
-  drawWave(hil);
+  //var hil = hilbert(dataArray);
+  drawWave(dataArray);
   //drawXY(hil.real, hil.imag);
 };
 
