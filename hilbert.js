@@ -47,7 +47,7 @@ function draw() {
   fft.forward(dataArray);
   var spectrum = fft.spectrum;
   drawSpectrum(spectrum);
-  fft.reverse(spectrum);
+  fft.inverse(spectrum);
   console.log(fft);
 };
 
