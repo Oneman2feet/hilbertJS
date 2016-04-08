@@ -62,6 +62,7 @@ function drawSpectrum(spectrum) {
     var v = spectrum[i];
     var y = v * HEIGHT/2;
 
+    canvasCtx.beginPath();
     canvasCtx.moveTo(x, HEIGHT/2);
     canvasCtx.lineTo(x, y);
     canvasCtx.stroke();
