@@ -48,7 +48,6 @@ function draw() {
   var spectrum = fft.spectrum;
   drawSpectrum(spectrum);
   fft.inverse(spectrum);
-  console.log(Object.getOwnPropertyNames(fft));
   drawXY(fft.real,fft.imag);
 };
 
@@ -58,8 +57,8 @@ function drawXY(real, imaginary) {
   canvasCtx.beginPath();
   canvasCtx.moveTo(0,0);
   for(var i=0; i<real.length; i++) {
-    var x = real[i];
-    var y = imaginary[i];
+    var x = real[i] * 0.001;
+    var y = imaginary[i] * 0.001;
     canvasCtx.lineTo(x + WIDTH * 0.5, y + HEIGHT * 0.5);
   }
   canvasCtx.stroke();
