@@ -4,7 +4,7 @@ var numSamples;
 
 var canvas = document.getElementById("canvas");
 var canvasCtx = canvas.getContext("2d");
-var WIDTH=500, HEIGHT=400;
+var WIDTH=canvas.width, HEIGHT=canvas.height;
 
 if (AudioContext){
   audioCtx = new AudioContext();
@@ -56,8 +56,7 @@ function draw() {
 
   analyser.getByteTimeDomainData(dataArray);
 
-  canvasCtx.fillStyle = 'rgb(200, 200, 200)';
-  canvasCtx.fillRect(0, 0, WIDTH, HEIGHT);
+  context.clearRect(0, 0, WIDTH, HEIGHT);
 
   canvasCtx.lineWidth = 2;
   canvasCtx.strokeStyle = 'rgb(0, 0, 0)';
