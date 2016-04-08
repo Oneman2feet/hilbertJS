@@ -38,19 +38,15 @@ function gotStream(stream) {
 
 function draw() {
   drawVisual = requestAnimationFrame(draw);
-  //analyser.getByteTimeDomainData(dataArray); // waveform
-  analyser.getByteFrequencyData(dataArray); // frequencies
+  analyser.getByteTimeDomainData(dataArray); // waveform
+  //analyser.getByteFrequencyData(dataArray); // frequencies
   canvasCtx.clearRect(0, 0, WIDTH, HEIGHT);
 
   // FFT
-  /*
   var fft = new FFT(2048, 44100);
   fft.forward(dataArray);
   var spectrum = fft.spectrum;
   drawSpectrum(spectrum);
-  */
-
-  drawFrequencies();
 };
 
 draw();
@@ -75,7 +71,7 @@ function drawSpectrum(spectrum) {
   }
 }
 
-function drawFrequencies(spectrum) {
+function drawFrequencies() {
   var barWidth = (WIDTH / bufferLength) * 2.5;
   var barHeight;
   var x = 0;
