@@ -56,7 +56,7 @@ function draw() {
 
   analyser.getByteTimeDomainData(dataArray);
 
-  context.clearRect(0, 0, WIDTH, HEIGHT);
+  canvasCtx.clearRect(0, 0, WIDTH, HEIGHT);
 
   canvasCtx.lineWidth = 2;
   canvasCtx.strokeStyle = 'rgb(0, 0, 0)';
