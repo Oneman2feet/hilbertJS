@@ -64,10 +64,11 @@ function draw() {
 
   canvasCtx.beginPath();
 
+  var bufferLength = numSamples; // is this right?
+
   var sliceWidth = WIDTH * 1.0 / bufferLength;
   var x = 0;
 
-  var bufferLength = numSamples; // is this right?
   for(var i = 0; i < bufferLength; i++) {
 
     var v = dataArray[i] / 128.0;
