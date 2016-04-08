@@ -54,6 +54,10 @@ function draw() {
 
   var hil = hilbert(dataArray);
   drawWave(hil.imag, 1000);
+  console.log(Object.getOwnPropertyNames(hil));
+  console.log(hil.real.length);
+  console.log(hil.imag.length);
+  console.log('-----');
   //drawXY(hil.real, hil.imag);
 };
 
