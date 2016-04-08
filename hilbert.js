@@ -44,6 +44,9 @@ function gotStream(stream) {
   streaming = true;
 }
 
+var canvas = document.getElementById("canvas");
+var canvasCtx = canvas.getContext("2d");
+
 // draw an oscilloscope of the current audio source
 function draw() {
   drawVisual = requestAnimationFrame(draw);
