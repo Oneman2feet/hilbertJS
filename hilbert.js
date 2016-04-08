@@ -58,13 +58,13 @@ function drawSpectrum(spectrum) {
   var sliceWidth = WIDTH * 1.0 / spectrum.length;
   var x = 0;
 
-  for(var i=0; i<spectrum.length; i++) {
+  for(var i=spectrum.length-1; i<=0; i--) {
     var v = spectrum[i];
     var y = v * HEIGHT/2;
 
     canvasCtx.beginPath();
-    canvasCtx.moveTo(x, HEIGHT/2);
-    canvasCtx.lineTo(x, y);
+    canvasCtx.moveTo(x, HEIGHT);
+    canvasCtx.lineTo(x, HEIGHT - y);
     canvasCtx.stroke();
 
     x += sliceWidth;
