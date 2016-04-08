@@ -48,11 +48,22 @@ function draw() {
   var spectrum = fft.spectrum;
   drawSpectrum(spectrum);
   fft.inverse(spectrum);
-  console.log(fft.real);
-  console.log(fft.imaginary);
+  console.log(Object.getOwnPropertyNames(fft));
+  drawXY(fft.real,fft.real);
 };
 
 draw();
+
+function drawXY(real, imaginary) {
+  canvasCtx.beginPath();
+  canvasCtx.moveTo(0,0);
+  for(var i=0; i<real.length; i++) {
+    var x = real[i];
+    var y = imaginary[i];
+    canvasCtx.lineTo(x + WIDTH * 0.5, y + HEIGHT * 0.5);
+  }
+  canvasCtx.stroke();
+}
 
 function drawSpectrum(spectrum) {
   canvasCtx.lineWidth = 1;
