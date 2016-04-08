@@ -48,7 +48,8 @@ function draw() {
   var spectrum = fft.spectrum;
   drawSpectrum(spectrum);
   fft.inverse(spectrum);
-  console.log(fft);
+  console.log(fft.real);
+  console.log(fft.imaginary);
 };
 
 draw();
