@@ -13,7 +13,7 @@ if (AudioContext){
   analyser.fftSize = 4096;
   gainNode.connect(analyser);
   // frequencyBinCount is readonly and set to fftSize/2;
-  var timeDomain = new Uint8Array(analyser.frequencyBinCount);
+  var dataArray = new Uint8Array(analyser.frequencyBinCount);
   var streaming = false;
   var sampleRate = audioCtx.sampleRate;
   var numSamples = analyser.frequencyBinCount;
