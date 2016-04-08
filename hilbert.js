@@ -53,7 +53,8 @@ function draw() {
   */
 
   var hil = hilbert(dataArray);
-  drawXY(hil.real, hil.imag);
+  drawWave(hil);
+  //drawXY(hil.real, hil.imag);
 };
 
 draw();
@@ -72,9 +73,34 @@ function hilbert(signal) {
   return fft;
 }
 
-function drawXY(real, imaginary) {
+function drawWave(signal) {
+  canvasCtx.lineWidth = 2;
+  canvasCtx.strokeStyle = '#000';
   canvasCtx.beginPath();
-  canvasCtx.moveTo(0,0);
+
+  var sliceWidth = WIDTH * 1.0 / signal.length;
+  var x = 0;
+
+  for(var i=0; i<signal.length; i++) {
+    var v = signal[i] / 128.0;
+    var y = v * HEIGHT/2;
+
+    if(i===0) {
+      canvasCtx.moveTo(x, y);
+    } else {
+      canvasCtx.lineTo(x, y);
+    }
+
+    x += sliceWidth;
+  }
+
+  canvasCtx.lineTo(canvas.width, canvas.height/2);
+  canvasCtx.stroke();
+}
+
+function drawXY(real, imaginary) {
+  canvasCtx.moveTo(WIDTH * 0.5, HEIGHT * 0.5);
+  canvasCtx.beginPath();
   for(var i=0; i<real.length; i++) {
     var x = real[i] * 0.001;
     var y = imaginary[i] * 0.001;
