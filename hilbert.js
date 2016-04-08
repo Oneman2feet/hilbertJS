@@ -1,35 +1,5 @@
 var AudioContext = (window.AudioContext || window.webkitAudioContext || window.mozAudioContext || window.oAudioContext || window.msAudioContext);
 
-if (AudioContext){
-  var audioCtx = new AudioContext();
-  var gainNode = audioCtx.createGain();
-  var analyser = audioCtx.createAnalyser();
-  //confusing, gain on oscilloscope, different for gain affecting input
-  // gainNode.gain.value = ui.gain.value;
-  gainNode.gain.value = 3;
-  analyser.smoothingTimeConstant = .9;
-  // analyser.fftSize = 512;
-  // analyser.fftSize = 1024;
-  analyser.fftSize = 4096;
-  gainNode.connect(analyser);
-  // frequencyBinCount is readonly and set to fftSize/2;
-  var dataArray = new Uint8Array(analyser.frequencyBinCount);
-  var streaming = false;
-  var sampleRate = audioCtx.sampleRate;
-  var numSamples = analyser.frequencyBinCount;
-  analyser.getByteTimeDomainData(dataArray);
-} else {
-  console.log("no audio context");
-}
-
-if (navigator.getUserMedia = (navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia)) {
-  navigator.getUserMedia({audio:true}, gotStream, function(error) {
-    console.log("Capture error: ", error.code);
-  });
-} else {
-  console.log('you need a better browser');
-};
-
 function gotStream(stream) {
   console.log('got stream');
   // Create an AudioNode from the stream.
@@ -43,9 +13,6 @@ function gotStream(stream) {
   // osc.connect(gainNode);
   streaming = true;
 }
-
-var canvas = document.getElementById("canvas");
-var canvasCtx = canvas.getContext("2d");
 
 // draw an oscilloscope of the current audio source
 function draw() {
@@ -82,4 +49,41 @@ function draw() {
   canvasCtx.stroke();
 };
 
+(function(window){
+
+if (AudioContext){
+  var audioCtx = new AudioContext();
+  var gainNode = audioCtx.createGain();
+  var analyser = audioCtx.createAnalyser();
+  //confusing, gain on oscilloscope, different for gain affecting input
+  // gainNode.gain.value = ui.gain.value;
+  gainNode.gain.value = 3;
+  analyser.smoothingTimeConstant = .9;
+  // analyser.fftSize = 512;
+  // analyser.fftSize = 1024;
+  analyser.fftSize = 4096;
+  gainNode.connect(analyser);
+  // frequencyBinCount is readonly and set to fftSize/2;
+  var dataArray = new Uint8Array(analyser.frequencyBinCount);
+  var streaming = false;
+  var sampleRate = audioCtx.sampleRate;
+  var numSamples = analyser.frequencyBinCount;
+  analyser.getByteTimeDomainData(dataArray);
+} else {
+  console.log("no audio context");
+}
+
+if (navigator.getUserMedia = (navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia)) {
+  navigator.getUserMedia({audio:true}, gotStream, function(error) {
+    console.log("Capture error: ", error.code);
+  });
+} else {
+  console.log('you need a better browser');
+};
+
+var canvas = document.getElementById("canvas");
+var canvasCtx = canvas.getContext("2d");
+
 draw();
+
+})(window);
