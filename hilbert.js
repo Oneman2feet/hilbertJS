@@ -83,7 +83,7 @@ function drawWave(signal, scale) {
 
   for(var i=0; i<signal.length; i++) {
     var v = signal[i] / scale;
-    var y = v * HEIGHT/2;
+    var y = v + HEIGHT/2;
 
     if(i===0) {
       canvasCtx.moveTo(x, y);
@@ -94,7 +94,7 @@ function drawWave(signal, scale) {
     x += sliceWidth;
   }
 
-  canvasCtx.lineTo(canvas.width, canvas.height/2);
+  canvasCtx.lineTo(WIDTH, HEIGHT/2);
   canvasCtx.stroke();
 }
 
