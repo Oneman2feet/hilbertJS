@@ -88,10 +88,12 @@ function convolve(source, filt, npt, lfilt) {
       target[i+lfilt/2]=target[i];
 
   /* writing zeros */
+  /*
   for (i=1; i<=lfilt/2; i++) {
       target[i] = 0.0;
       target[npt+1-i] = 0.0;
   }
+  */
 
   return target;
 }
