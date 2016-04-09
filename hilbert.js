@@ -54,7 +54,7 @@ function draw() {
 
   //var hil = hilbert(dataArray);
   //drawWave(hil.imag, 100);
-  drawXY(dataArray, dataArray);
+  drawXY(dataArray, dataArray, 10);
 };
 
 draw();
@@ -98,12 +98,12 @@ function drawWave(signal, scale) {
   canvasCtx.stroke();
 }
 
-function drawXY(real, imaginary) {
+function drawXY(real, imaginary, scale) {
   canvasCtx.moveTo(WIDTH * 0.5, HEIGHT * 0.5);
   canvasCtx.beginPath();
   for(var i=0; i<real.length; i++) {
-    var x = real[i] * 0.001;
-    var y = imaginary[i] * 0.001;
+    var x = real[i] / scale;
+    var y = imaginary[i] / scale;
     canvasCtx.lineTo(x + WIDTH * 0.5, y + HEIGHT * 0.5);
   }
   canvasCtx.stroke();
