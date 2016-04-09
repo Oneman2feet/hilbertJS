@@ -53,7 +53,7 @@ function draw() {
   */
 
   var hil = hilbert(dataArray);
-  drawWave(dataArray, 1000);
+  drawWave(hil.real, 1000);
   //drawXY(hil.real, hil.imag);
 };
 
