@@ -52,12 +52,50 @@ function draw() {
   drawXY(fft.real,fft.imag);
   */
 
-  var hil = hilbert(dataArray);
+  var hil = hilbertTransform(dataArray);
+  console.log(hil);
   //drawWave(hil.imag, 100);
-  drawXY(hil.real, hil.real, 100);
+  //drawXY(hil.real, hil.real, 100);
+
 };
 
 draw();
+
+function hilbertTransform(signal) {
+  var lfilt = bufferLength;
+  var npt = signal.length;
+  var hilb = [];
+  for (i=1; i<=lfilt; i++) hilb[i]=1/((i-lfilt/2)-0.5)/Math.PI;
+  return convolve(signal, hilb, npt, lfilt);
+}
+
+// adapted from [http://www.physionet.org/physiotools/apdet/apdet-1.0/ht.c]
+function convolve(source, filt, npt, lfilt) {
+  var i, l, yt;
+  var target = [];
+
+  for (l=1; l<=npt-lfilt+1; l++) {
+    yt = 0.0;
+    for (i=1; i<=lfilt; i++) 
+        yt = yt+source[l+i-1]*filt[lfilt+1-i];
+    target[l] = yt;
+  }
+
+  /* shifting lfilt/1+1/2 points */
+  for (i=1; i<=npt-lfilt; i++) {
+      target[i] = 0.5*(target[i]+target[i+1]);
+  }
+  for (i=npt-lfilt; i>=1; i--)
+      target[i+lfilt/2]=target[i];
+
+  /* writing zeros */
+  for (i=1; i<=lfilt/2; i++) {
+      target[i] = 0.0;
+      target[npt+1-i] = 0.0;
+  }
+
+  return target;
+}
 
 function hilbert(signal) {
   var fft = new FFT(2048, 44100);
