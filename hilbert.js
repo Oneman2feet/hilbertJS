@@ -52,9 +52,10 @@ function draw() {
   drawXY(fft.real,fft.imag);
   */
 
-  var hil = hilbertTransform(dataArray);
-  drawWave(hil, 100);
+  //var hil = hilbertTransform(dataArray);
+  //drawWave(hil, 100);
   //drawXY(hil.real, hil.real, 100);
+  drawOscilloscope();
 
 };
 
